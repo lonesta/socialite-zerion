@@ -3,8 +3,8 @@
 namespace lonesta\SocialiteProviders\Zerion;
 
 use Laravel\Socialite\Two\ProviderInterface;
-use SocialiteProviders\Manager\OAuth2\User;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
+use SocialiteProviders\Manager\OAuth2\User;
 
 class Provider extends AbstractProvider implements ProviderInterface
 {
@@ -42,14 +42,14 @@ class Provider extends AbstractProvider implements ProviderInterface
     protected function getUserByToken($token)
     {
         $params = [
-            'format'          => 'json',
-            'method'          => 'users.getCurrentUser',
-            'fields'          => 'uid,name,first_name,last_name,birthday,pic190x190,has_email,email'
+            'format' => 'json',
+            'method' => 'users.getCurrentUser',
+            'fields' => 'uid,name,first_name,last_name,birthday,pic190x190,has_email,email',
         ];
 
         ksort($params, SORT_STRING);
 
-        $_params = array_map(function($key, $value) {
+        $_params = array_map(function ($key, $value) {
             return $key . '=' . $value;
         }, array_keys($params), array_values($params));
 
