@@ -1,9 +1,9 @@
 <?php
-namespace JhaoDa\SocialiteProviders\Odnoklassniki;
+namespace Lonesta\SocialiteProviders\Zerion;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
-class OdnoklassnikiExtendSocialite
+class ZerionExtendSocialite
 {
     /**
      * Register the provider.
@@ -13,7 +13,7 @@ class OdnoklassnikiExtendSocialite
     public function handle(SocialiteWasCalled $socialiteWasCalled)
     {
         $socialiteWasCalled->extendSocialite(
-            'odnoklassniki', __NAMESPACE__ . '\Provider'
+            'zerion', __NAMESPACE__ . '\Provider'
         );
     }
 }

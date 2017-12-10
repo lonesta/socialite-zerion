@@ -1,10 +1,10 @@
 {
-    "name": "jhaoda/socialite-odnoklassniki",
-    "description": "Odnoklassniki OAuth2 Provider for Laravel Socialite",
+    "name": "lonesta/socialite-zerion",
+    "description": "zerion OAuth2 Provider for Laravel Socialite",
     "license": "MIT",
     "authors": [{
-        "name": "JhaoDa",
-        "email": "jhaoda@gmail.com"
+        "name": "lonesta",
+        "email": "mini223@yandex.ru"
     }],
     "require": {
         "php": "^5.6 || ^7.0",
