@@ -24,7 +24,7 @@ class Provider extends AbstractProvider implements ProviderInterface
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
-            'https://apis.zerion.io/oauth/authorize', $state
+            'https://apis.zerion.io/oauth/authorize/', $state
         );
     }
 
@@ -85,5 +85,20 @@ class Provider extends AbstractProvider implements ProviderInterface
         return array_merge(parent::getTokenFields($code), [
             'grant_type' => 'authorization_code',
         ]);
+    }
+
+    protected function getCodeFields($state = null)
+    {
+        $fields = [
+            'client_id'     => $this->clientId,
+            'callback'      => $this->redirectUrl,
+            'response_type' => 'token',
+        ];
+
+        if ($this->usesState()) {
+            $fields['state'] = $state;
+        }
+
+        return array_merge($fields, $this->parameters);
     }
 }
