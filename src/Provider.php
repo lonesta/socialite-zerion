@@ -24,7 +24,7 @@ class Provider extends AbstractProvider implements ProviderInterface
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
-            'http://connect.ok.ru/oauth/authorize', $state
+            'https://apis.zerion.io/oauth/authorize', $state
         );
     }
 
@@ -33,7 +33,7 @@ class Provider extends AbstractProvider implements ProviderInterface
      */
     protected function getTokenUrl()
     {
-        return 'https://api.odnoklassniki.ru/oauth/token.do';
+        return 'https://apis.zerion.io/oauth/authorize';
     }
 
     /**
@@ -44,7 +44,6 @@ class Provider extends AbstractProvider implements ProviderInterface
         $params = [
             'format'          => 'json',
             'method'          => 'users.getCurrentUser',
-            'application_key' => $this->getConfig('client_public', env('ODNOKLASSNIKI_PUBLIC')),
             'fields'          => 'uid,name,first_name,last_name,birthday,pic190x190,has_email,email'
         ];
 
@@ -86,12 +85,5 @@ class Provider extends AbstractProvider implements ProviderInterface
         return array_merge(parent::getTokenFields($code), [
             'grant_type' => 'authorization_code',
         ]);
-    }
-
-    public static function additionalConfigKeys()
-    {
-        return [
-            'client_public'
-        ];
     }
 }
