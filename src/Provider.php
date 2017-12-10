@@ -1,6 +1,6 @@
 <?php
 
-namespace JhaoDa\SocialiteProviders\Odnoklassniki;
+namespace lonesta\SocialiteProviders\Zerion;
 
 use Laravel\Socialite\Two\ProviderInterface;
 use SocialiteProviders\Manager\OAuth2\User;
