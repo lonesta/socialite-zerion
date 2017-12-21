@@ -73,6 +73,10 @@ class Provider extends AbstractProvider implements ProviderInterface
         ];
     }
 
+    /**
+     * @param null $state
+     * @return array
+     */
     protected function getCodeFields($state = null)
     {
         $fields = [
