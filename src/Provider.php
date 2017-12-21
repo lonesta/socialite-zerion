@@ -13,26 +13,38 @@ class Provider extends AbstractProvider implements ProviderInterface
      */
     const IDENTIFIER = 'ZERION';
 
+    const AUTH_URL = 'https://apis.zerion.io/oauth/authorize/';
+
+    const TOKEN_URL = 'https://apis.zerion.io/oauth/token/';
+
+    const USER_DATA_URL = 'https://apis.zerion.io/v1/project/access/';
+
+
     /**
-     * {@inheritdoc}
+     * @param $state
+     * @return mixed
      */
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
-            'https://apis.zerion.io/oauth/authorize/', $state
+            self::AUTH_URL, $state
         );
     }
 
+
     /**
-     * {@inheritdoc}
+     * @param $token
+     * @return mixed
      */
     protected function getUserByToken($token)
     {
+        $token = 'Bearer ' . $token;
+
         $response = $this->getHttpClient()->get(
-            'https://apis.zerion.io/v1/project/access/',
+            self::USER_DATA_URL,
             [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $token,
+                    'Authorization' => $token,
                 ],
             ]
         );
@@ -40,16 +52,18 @@ class Provider extends AbstractProvider implements ProviderInterface
         return json_decode($response->getBody(), true);
     }
 
+
     /**
-     * {@inheritdoc}
+     * @return string
      */
     protected function getTokenUrl()
     {
-        return 'https://apis.zerion.io/oauth/token/';
+        return self::TOKEN_URL;
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $user
+     * @return mixed
      */
     protected function mapUserToObject(array $user)
     {
@@ -59,8 +73,10 @@ class Provider extends AbstractProvider implements ProviderInterface
         ]);
     }
 
+
     /**
-     * {@inheritdoc}
+     * @param $code
+     * @return array
      */
     protected function getTokenFields($code)
     {
