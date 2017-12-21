@@ -16,11 +16,6 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected $scopes = ['GET_EMAIL'];
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
@@ -31,33 +26,15 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTokenUrl()
-    {
-        return 'https://apis.zerion.io/oauth/authorize';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getUserByToken($token)
     {
-        $params = [
-            'format' => 'json',
-            'method' => 'users.getCurrentUser',
-            'fields' => 'uid,name,first_name,last_name,birthday,pic190x190,has_email,email',
-        ];
-
-        ksort($params, SORT_STRING);
-
-        $_params = array_map(function ($key, $value) {
-            return $key . '=' . $value;
-        }, array_keys($params), array_values($params));
-
-        $params['sig'] = md5(implode('', $_params) . md5($token . $this->clientSecret));
-        $params['access_token'] = $token;
-
         $response = $this->getHttpClient()->get(
-            'https://api.ok.ru/fb.do?' . http_build_query($params)
+            'https://apis.zerion.io/v1/project/access/',
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+            ]
         );
 
         return json_decode($response->getBody(), true);
@@ -66,14 +43,19 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
+    protected function getTokenUrl()
+    {
+        return 'https://apis.zerion.io/oauth/token/';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id'       => $user['uid'],
-            'name'     => $user['name'],
-            'nickname' => null,
-            'email'    => array_get($user, 'email'),
-            'avatar'   => array_get($user, 'pic190x190'),
+            'id'    => $user['UUID'],
+            'email' => $user['email'],
         ]);
     }
 
@@ -82,17 +64,21 @@ class Provider extends AbstractProvider implements ProviderInterface
      */
     protected function getTokenFields($code)
     {
-        return array_merge(parent::getTokenFields($code), [
-            'grant_type' => 'authorization_code',
-        ]);
+        return [
+            'client_id'     => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'code'          => $code,
+            'redirect_uri'  => 'https://thetoken.io/oauth/zerion',
+            'grant_type'    => 'authorization_code',
+        ];
     }
 
     protected function getCodeFields($state = null)
     {
         $fields = [
             'client_id'     => $this->clientId,
-            'callback'      => $this->redirectUrl,
-            'response_type' => 'token',
+            'callback'      => urlencode($this->redirectUrl . '/'),
+            'response_type' => 'code',
         ];
 
         if ($this->usesState()) {
