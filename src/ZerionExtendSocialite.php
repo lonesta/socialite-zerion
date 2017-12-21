@@ -1,4 +1,5 @@
 <?php
+
 namespace lonesta\SocialiteProviders\Zerion;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
