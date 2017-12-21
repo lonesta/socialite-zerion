@@ -1,8 +1,8 @@
-# Odnoklassniki OAuth2 Provider for Laravel Socialite
+# Zerion OAuth2 Provider for Laravel Socialite
 
 ### 1. Installation
 
-`composer require jhaoda/socialite-odnoklassniki`
+`composer require lonesta/socialite-zerion`
 
 ### 2. Service Provider
 
@@ -25,7 +25,7 @@ For example:
 
 * Add your listeners (i.e. the ones from the providers) to the `SocialiteProviders\Manager\SocialiteWasCalled[]` that you just created.
 
-* The listener that you add for this provider is `JhaoDa\SocialiteProviders\Odnoklassniki\OdnoklassnikiExtendSocialite::class`.
+* The listener that you add for this provider is `lonesta\SocialiteProviders\Zerion\ZerionExtendSocialite@handle`.
 
 * Note: You do not need to add anything for the built-in socialite providers unless you override them with your own providers.
 
@@ -38,7 +38,7 @@ For example:
  */
 protected $listen = [
     \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-        \JhaoDa\SocialiteProviders\Odnoklassniki\OdnoklassnikiExtendSocialite::class
+        'lonesta\SocialiteProviders\Zerion\ZerionExtendSocialite@handle'
     ],
 ];
 ```
@@ -47,11 +47,10 @@ protected $listen = [
 
 Add to `config/services.php`:
 ```php
-'odnoklassniki' => [
-    'client_id' => env('ODNOKLASSNIKI_ID'),
-    'client_secret' => env('ODNOKLASSNIKI_SECRET'),
-    'client_public' => env('ODNOKLASSNIKI_PUBLIC'),
-    'redirect' => env('ODNOKLASSNIKI_REDIRECT'),  
+'zerion' => [
+    'client_id'     => env('ZERION_ID'),
+    'client_secret' => env('ZERION_SECRET'),
+    'redirect'      => env('ZERION_REDIRECT'),
 ],
 ```
 
@@ -59,8 +58,7 @@ Append provider values to your `.env` file:
 **Note: Add both public and secret keys!**
 ```
 // other values above
-ODNOKLASSNIKI_ID=your_app_id_for_the_service
-ODNOKLASSNIKI_PUBLIC=your_app_public_for_the_service
-ODNOKLASSNIKI_SECRET=your_app_secret_for_the_service
-ODNOKLASSNIKI_REDIRECT=https://example.com/login
+ZERION_ID=your_app_id_for_the_service
+ZERION_SECRET=your_app_secret_for_the_service
+ZERION_REDIRECT=https://example.com/login
 ```

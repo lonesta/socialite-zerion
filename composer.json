@@ -1,6 +1,6 @@
 {
   "name": "lonesta/socialite-zerion",
-  "description": "zerion OAuth2 Provider for Laravel Socialite",
+  "description": "Zerion OAuth2 Provider for Laravel Socialite",
   "license": "MIT",
   "authors": [
     {
