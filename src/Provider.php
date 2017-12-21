@@ -68,7 +68,7 @@ class Provider extends AbstractProvider implements ProviderInterface
             'client_id'     => $this->clientId,
             'client_secret' => $this->clientSecret,
             'code'          => $code,
-            'redirect_uri'  => 'https://thetoken.io/oauth/zerion',
+            'redirect_uri'  => $this->redirectUrl,
             'grant_type'    => 'authorization_code',
         ];
     }
@@ -81,7 +81,7 @@ class Provider extends AbstractProvider implements ProviderInterface
     {
         $fields = [
             'client_id'     => $this->clientId,
-            'callback'      => urlencode($this->redirectUrl . '/'),
+            'callback'      => urlencode($this->redirectUrl),
             'response_type' => 'code',
         ];
 
