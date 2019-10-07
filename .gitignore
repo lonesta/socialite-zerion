@@ -1,1 +1,149 @@
-.idea
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# dependencies
+/node_modules
+
+# profiling files
+chrome-profiler-events.json
+speed-measure-plugin.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+__pycache__/
+
+### Laravel ###
+/backend/api/node_modules
+/backend/api/public/hot
+/backend/api/public/storage
+/backend/api/storage/*.key
+/backend/api/vendor/
+/backend/api/.idea
+/backend/api/.vagrant
+/api/Homestead.json
+/api/Homestead.yaml
+/api/Vagrantfile
+/api/npm-debug.log
+/api/yarn-error.log
+/backend/api/.env
+/api/_ide_helper.php
+/api/.phpstorm.meta.php
+/api/.php_cs.cache
+/api/composer-setup.php
+/api/composer.phar
+/api/_ide_helper_models.php
+
+### PhpStorm ###
+.idea/
+*.iml
+*.ipr
+*.iws
+/out/
+.idea_modules/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### SublimeText ###
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+sftp-config.json
+
+
+### CodeKit ###
+config.codekit
+/min
+
+### Node ###
+*.log
+!/resources/views/admin/logs
+npm-debug.log*
+pids
+*.pid
+*.seed
+lib-cov
+coverage
+.grunt
+.lock-wscript
+build/Release
+node_modules
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+### Sass ###
+.sass-cache/
+*.css.map
+*.js.map
+
+### Webpack ###
+/client/config/config.js
+/client/public/dist/
+/client/frontend.log
+/client/package-lock.json
+/workers/performance.db
+!/src/vendor/vendor.json
+/src/vendor/
+/src/pkg/mod/
+/pkg/
+/backend/api/bootstrap/cache/packages.php
+/backend/api/bootstrap/cache/services.php
